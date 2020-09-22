@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    
+<!-- 1 - Dê Oi e saiba o nome da pessoa:  -->
+
+<category><pattern>Olá</pattern>
+    <template>Olá, me chamo <bot name="name"/>, sou o Bot do desafio de programação, como você se chama?</template>
+</category>
+<category><pattern>Oi</pattern><template><srai>Olá</srai></template></category>
+<category><pattern>Hello</pattern><template><srai>Olá</srai></template></category>
+<category><pattern>Eai</pattern><template><srai>Olá</srai></template></category>
+
+<category>
+    <pattern>* chamo *</pattern>
+    <template>Fala ai <set name="userName"><star index="2"></star></set>, como posso te ajudar?</template>
+</category>
+<category>
+    <pattern>* sou *</pattern>
+    <template>Ok! <uppercase><set name="userName"><star index="2"></star></set></uppercase>, posso ajudá-lo em algo?</template>
+</category>
+<category>
+    <pattern>* sou *</pattern>
+    <template>Prazer em conhecê-lo <uppercase><set name="userName"><star index="2"></star></set></uppercase>, posso ajudá-lo em algo?</template>
+</category>
+
+<category>
+    <pattern>como é meu nome</pattern>
+    <template>
+        <random>
+			<li><get name="userName"></get>!</li>
+			<li>Seu nome é <get name="userName"></get>!</li>
+			<li>Tá esquecido hein <get name="userName"></get>!</li>
+		</random>
+    </template>
+</category>
+
+<!-- 2 - Conte de um número (0 até 20) até outro número (0 até 20). -->
+
+<category>
+<pattern>conte de <set>number</set> até <set>number</set></pattern>
+<template>
+  <think><set name="count"><star index = "1"/></set></think>
+  <star index = "1"/>
+  <condition name="count">
+    <li><value><star index = "2"/></value></li>
+    <li>
+      , <set name="count">
+        <map><name>successor</name><get name="count"/></map>
+      </set>
+      <loop/>
+    </li>
+  </condition>
+</template>
+</category>
+
+<!-- 3 - Nunca deve responder "I have no answer for that" e sim "Não entendi, pode falar de outra forma?" -->
+
+<category>
+    <pattern>*</pattern>
+    <template>Não entendi, pode falar de outra forma?</template>
+</category>
+</aiml>
